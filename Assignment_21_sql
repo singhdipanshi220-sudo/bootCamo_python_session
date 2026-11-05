@@ -1,0 +1,29 @@
+CREATE TABLE books (
+id INTEGER PRIMARY KEY,
+title VARCHAR(100),
+author VARCHAR(50)
+);
+CREATE TABLE members (
+id INTEGER PRIMARY KEY,
+name VARCHAR(50)
+);
+CREATE TABLE loans (
+member_id INTEGER,
+book_id INTEGER
+);
+
+INSERT INTO books (id, title, author) VALUES (1, 'Wings of Fire', 'A P J Abdul Kalam');
+INSERT INTO books (id, title, author) VALUES (2, 'Godaan', 'Premchand');
+INSERT INTO books (id, title, author) VALUES (3, 'Malgudi Days', 'R K Narayan');
+INSERT INTO books (id, title, author) VALUES (4, 'Gitanjali', 'Rabindranath Tagore');
+INSERT INTO members (id, name) VALUES (1, 'Asha');
+INSERT INTO members (id, name) VALUES (2, 'Rohit');
+INSERT INTO members (id, name) VALUES (3, 'Priya');
+INSERT INTO loans (member_id, book_id) VALUES (1, 2);
+INSERT INTO loans (member_id, book_id) VALUES (2, 1);
+INSERT INTO loans (member_id, book_id) VALUES (1, 3);
+
+SELECT * FROM books;
+SELECT * FROM members;
+SELECT * FROM loans;
+-- By hand: Asha borrowed Godaan and Malgudi Days, Rohit borrowed Wings of Fire
