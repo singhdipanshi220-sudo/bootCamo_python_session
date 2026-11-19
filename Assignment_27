@@ -1,0 +1,15 @@
+routers/events.py
+from fastapi import APIRouter
+router = APIRouter(prefix="/events", tags=["events"])
+events = [
+{"title": "Welcome Day", "day": "Monday"},
+{"title": "SQL Workshop", "day": "Wednesday"},
+{"title": "API Demo", "day": "Friday"},
+{"title": "Quiz", "day": "Monday"},
+]
+@router.get("")
+def list_events():
+return events
+@router.get("/{day}")
+def events_on(day: str):
+return [e for e in events if e["day"].lower() == day.lower()]
