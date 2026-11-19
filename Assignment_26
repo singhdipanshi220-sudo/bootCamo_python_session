@@ -1,0 +1,26 @@
+import json
+import requests
+BASE = "https://jsonplaceholder.typicode.com"
+def get(path, params=None):
+return requests.get(BASE + path, params=params, timeout=10)
+users = get("/users").json()
+print("Users:", len(users))
+posts = get("/posts", {"userId": 1}).json()
+print("Posts by user 1:", len(posts))
+new_post = {"title": "HTTP report", "body": "Done", "userId": 1}
+response = requests.post(BASE + "/posts",
+json=new_post, timeout=10)
+created_id = response.json()["id"]
+print("Created:", response.status_code, created_id)
+
+
+try:
+get("/users/99").raise_for_status()
+except requests.exceptions.HTTPError:
+print("User 99 not found")
+report = {"users": len(users),
+"posts_by_user_1": len(posts),
+"created_post_id": created_id}
+with open("report.json", "w") as file:
+json.dump(report, file, indent=2)
+print(json.dumps(report))
